@@ -14,8 +14,8 @@ mixin StepStyle on IStepPage {
   List<Widget> buildNumberStep() {
     List<Widget> steps = [];
     for (int index = 0;
-        index < StepperModel().notifier.getTotalSteps;
-        index++) {
+    index < StepperModel().notifier.getTotalSteps;
+    index++) {
       /// step circles
       steps.add(
         Stack(children: [
@@ -42,93 +42,95 @@ mixin StepStyle on IStepPage {
   List<Widget> buildCustomStep() {
     List<Widget> steps = [];
     for (int index = 0;
-        index < StepperModel().notifier.getTotalSteps;
-        index++) {
+    index < StepperModel().notifier.getTotalSteps;
+    index++) {
       steps.add(StepperModel().stepperAxis == Axis.horizontal
           ? Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Stack(children: [
-                      if (StepperModel().stepBorder) buildBorder(index),
-                      SizedBox(
-                        height: StepperModel().stepHeight,
-                        width: StepperModel().stepWidth,
-                        child: buildCustomInnerElementOfStepper(index),
-                      )
-                    ]),
-                    if (index != StepperModel().notifier.getTotalSteps - 1)
-                      buildLine(index, StepperModel().stepperSize.width,
-                          getLineColor(index)),
-                  ],
-                ),
-                if (StepperModel().customSteps![index].title != null)
-                  Container(
-                    padding: const EdgeInsets.only(top: 3),
-                    alignment: Alignment.centerLeft,
-                    width: StepperModel().stepWidth + 10,
-                    child: Text(
-                      StepperModel().customSteps![index].title ?? "",
-                      softWrap: true,
-                      maxLines: 1,
-                      style: TextStyle(
-                          fontSize:
-                              index == StepperModel().notifier.currentIndex
-                                  ? 14
-                                  : 12,
-                          color: index == StepperModel().notifier.currentIndex
-                              ? getBorderColor(index)
-                              : StepperModel().step.inactiveStepColor),
-                    ),
-                  )
-              ],
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Stack(children: [
+                if (StepperModel().stepBorder) buildBorder(index),
+                SizedBox(
+                  height: StepperModel().stepHeight,
+                  width: StepperModel().stepWidth,
+                  child: StepperModel().customSteps![index].customChild ??
+                      buildCustomInnerElementOfStepper(index),
+                )
+              ]),
+              if (index != StepperModel().notifier.getTotalSteps - 1)
+                buildLine(index, StepperModel().stepperSize.width,
+                    getLineColor(index)),
+            ],
+          ),
+          if (StepperModel().customSteps![index].title != null)
+            Container(
+              padding: const EdgeInsets.only(top: 3),
+              alignment: Alignment.center,
+              width: StepperModel().stepWidth + 10,
+              child: Text(
+                StepperModel().customSteps![index].title ?? "",
+                softWrap: true,
+                // maxLines: 1,
+                textAlign: StepperModel().customSteps![index].textAlign,
+                style: TextStyle(
+                    fontSize: StepperModel().fontSize,
+                    // index == StepperModel().notifier.currentIndex
+                    //     ?  StepperModel().fontSize,
+                    //     : StepperModel().fontSize + 2,
+                    color: index == StepperModel().notifier.currentIndex
+                        ? getBorderColor(index)
+                        : StepperModel().step.inactiveStepColor),
+              ),
             )
+        ],
+      )
           : Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Stack(children: [
-                  if (StepperModel().stepBorder) buildBorder(index),
-                  SizedBox(
-                    height: StepperModel().stepHeight,
-                    width: StepperModel().stepWidth,
-                    child: buildCustomInnerElementOfStepper(index),
-                  )
-                ]),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    //if (index != StepperModel().notifier.getTotalSteps - 1)
-                    buildLine(
-                        index,
-                        StepperModel().stepperSize.width,
-                        index == StepperModel().notifier.currentIndex
-                            ? StepperModel().step.currentStepColor
-                            : getBorderColor(index),
-                        2),
-                    if (StepperModel().customSteps![index].title != null)
-                      Text(
-                        StepperModel().customSteps![index].title ?? "",
-                        maxLines: 2,
-                        textAlign: TextAlign.center,
-                        overflow: TextOverflow.ellipsis,
-                        softWrap: true,
-                        style: TextStyle(
-                            fontSize:
-                                index == StepperModel().notifier.currentIndex
-                                    ? 14
-                                    : 12,
-                            color: index == StepperModel().notifier.currentIndex
-                                ? getBorderColor(index)
-                                : StepperModel().step.inactiveStepColor),
-                      ),
-                    if (index != StepperModel().notifier.getTotalSteps - 1)
-                      buildLine(index, StepperModel().stepperSize.width,
-                          getLineColor(index), 2),
-                  ],
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Stack(children: [
+            if (StepperModel().stepBorder) buildBorder(index),
+            SizedBox(
+              height: StepperModel().stepHeight,
+              width: StepperModel().stepWidth,
+              child: buildCustomInnerElementOfStepper(index),
+            )
+          ]),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              //if (index != StepperModel().notifier.getTotalSteps - 1)
+              buildLine(
+                  index,
+                  StepperModel().stepperSize.width,
+                  index == StepperModel().notifier.currentIndex
+                      ? StepperModel().step.currentStepColor
+                      : getBorderColor(index),
+                  2),
+              if (StepperModel().customSteps![index].title != null)
+                Text(
+                  StepperModel().customSteps![index].title ?? "",
+                  maxLines: 2,
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.ellipsis,
+                  softWrap: true,
+                  style: TextStyle(
+                      fontSize:
+                      index == StepperModel().notifier.currentIndex
+                          ? 14
+                          : 12,
+                      color: index == StepperModel().notifier.currentIndex
+                          ? getBorderColor(index)
+                          : StepperModel().step.inactiveStepColor),
                 ),
-              ],
-            ));
+              if (index != StepperModel().notifier.getTotalSteps - 1)
+                buildLine(index, StepperModel().stepperSize.width,
+                    getLineColor(index), 2),
+            ],
+          ),
+        ],
+      ));
     }
     return steps;
   }

@@ -9,6 +9,14 @@ import 'package:stepper_a/src/utils/stepper_model.dart';
 /// switch previous and forward page on button press.
 ///
 class StepperAController {
+  int getIndex() {
+    try {
+      return StepperModel().notifier.currentIndex;
+    } catch (e) {
+      return 0;
+    }
+  }
+
   void changeIndex(int newIndex) {
     StepperModel().notifier.currentIndex = newIndex;
   }

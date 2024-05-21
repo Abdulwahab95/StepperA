@@ -49,6 +49,8 @@ class StepperA extends StatefulWidget {
   ///default step width is 50.
   final double stepWidth;
 
+  final double fontSize;
+
   ///this field stepper step height.
   ///default step height is 50.
   final double stepHeight;
@@ -121,33 +123,34 @@ class StepperA extends StatefulWidget {
 
   const StepperA(
       {Key? key,
-      this.lineThickness = 2,
-      required this.stepperSize,
-      required this.stepperBodyWidget,
-      this.stepperBackgroundColor = Colors.white,
-      this.padding = const EdgeInsets.all(5),
-      this.margin = const EdgeInsets.all(5),
-      this.stepPadding = const EdgeInsets.all(5),
-      this.radius = const Radius.circular(10),
-      this.borderType = BorderType.straight,
-      this.lineType = LineType.straight,
-      this.borderShape = BorderShape.circle,
-      this.dashPattern = const <double>[3, 5],
-      this.stepHeight = 50,
-      this.stepWidth = 50,
-      this.stepperAxis = Axis.horizontal,
-      this.formValidation = false,
-      this.floatingForwardButton,
-      this.floatingPreviousButton,
-      this.forwardButton,
-      this.previousButton,
-      this.stepperAController,
-      required this.stepBorder,
-      this.customSteps,
-      required this.step,
-      this.pageSwipe = true})
+        this.lineThickness = 2,
+        required this.stepperSize,
+        required this.stepperBodyWidget,
+        this.stepperBackgroundColor = Colors.white,
+        this.padding = const EdgeInsets.all(5),
+        this.margin = const EdgeInsets.all(5),
+        this.stepPadding = const EdgeInsets.all(5),
+        this.radius = const Radius.circular(10),
+        this.borderType = BorderType.straight,
+        this.lineType = LineType.straight,
+        this.borderShape = BorderShape.circle,
+        this.dashPattern = const <double>[3, 5],
+        this.stepHeight = 50,
+        this.stepWidth = 50,
+        this.stepperAxis = Axis.horizontal,
+        this.formValidation = false,
+        this.floatingForwardButton,
+        this.floatingPreviousButton,
+        this.forwardButton,
+        this.previousButton,
+        this.stepperAController,
+        required this.stepBorder,
+        this.customSteps,
+        required this.step,
+        this.fontSize = 12,
+        this.pageSwipe = true})
       : _floatingButton =
-            (floatingForwardButton != null && floatingPreviousButton != null),
+  (floatingForwardButton != null && floatingPreviousButton != null),
         super(key: key);
 
   @override
@@ -210,8 +213,8 @@ class _StepperAStateModel extends _StepperAState
           return Scaffold(
               backgroundColor: Colors.transparent,
               body: (widget.customSteps != null &&
-                      widget.stepperBodyWidget.length !=
-                          widget.customSteps?.length)
+                  widget.stepperBodyWidget.length !=
+                      widget.customSteps?.length)
                   ? throw ("customSteps and stepperBodyWidget length must be provide equals")
                   : buildStepper());
         });
@@ -231,6 +234,7 @@ class _StepperAStateModel extends _StepperAState
     _notifier.loadingPage = false;
     StepperModel.init(
         lineThickness: widget.lineThickness,
+        fontSize: widget.fontSize,
         stepperSize: widget.stepperSize,
         stepperBodyWidget: widget.stepperBodyWidget,
         stepperBackgroundColor: widget.stepperBackgroundColor,
@@ -270,6 +274,7 @@ class _StepperAStateModel extends _StepperAState
         lineThickness: widget.lineThickness,
         stepperSize: widget.stepperSize,
         stepperBodyWidget: widget.stepperBodyWidget,
+        fontSize: widget.fontSize,
         stepperBackgroundColor: widget.stepperBackgroundColor,
         padding: widget.padding,
         margin: widget.margin,

@@ -6,7 +6,7 @@
 import 'package:flutter/material.dart';
 import '../interface/calculate.dart';
 import '../interface/step_page/i_step_page.dart';
-import '../interface/step_page/step_style.dart';
+import '../interface/step_page/step_style.dart' as step_style_lib;
 import '../interface/step_page/style_mixin.dart';
 import '../interface/step_page/widget_mixin.dart';
 import '../line.dart';
@@ -17,7 +17,7 @@ abstract class AStepperStep extends StatelessWidget implements IStepPage {
 }
 
 class StepperStep extends AStepperStep
-    with StepStyle, CalculateSize, StyleMixin, WidgetMixin {
+    with step_style_lib.StepStyle, CalculateSize, StyleMixin, WidgetMixin {
   StepperStep({super.key});
 
   @override
@@ -29,6 +29,7 @@ class StepperStep extends AStepperStep
       width: stepperSizeCalculate().width,
       child: SingleChildScrollView(
         scrollDirection: StepperModel().stepperAxis,
+        physics: const NeverScrollableScrollPhysics(),
         controller: StepperModel().notifier.getStepScrollController(
             itemWidth: StepperModel().stepWidth,
             lineWidth: CalculateLength(
